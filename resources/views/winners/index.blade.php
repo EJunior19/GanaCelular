@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Ganadores')
+@section('title', 'Ganadores — Gana tu Celular Py')
 
 @section('content')
 
 <div class="max-w-4xl mx-auto px-4 py-10 text-white">
 
-    <h1 class="text-3xl font-bold text-yellow-400 mb-6 text-center">
+    <h1 class="text-3xl font-black neon-text mb-6 text-center">
         🏆 Últimos Ganadores
     </h1>
 
@@ -14,13 +14,14 @@
 
         @forelse($winners as $raffle)
 
-            <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+            <div class="rounded-xl shadow-lg overflow-hidden card-dark">
 
                 <!-- ENCABEZADO DEL SORTEO -->
-                <div class="flex justify-between items-center px-5 py-3 border-b border-gray-700">
+                <div class="flex justify-between items-center px-5 py-3"
+                     style="border-bottom: 1px solid rgba(57,255,20,0.15);">
                     <div>
-                        <div class="text-lg font-bold">
-                            🎯 {{ $raffle->name ?? 'Sorteo #' . $raffle->id }}
+                        <div class="text-lg font-black gold-text">
+                            📱 {{ $raffle->name ?? 'Sorteo #' . $raffle->id }}
                         </div>
                         <div class="text-gray-400 text-xs">
                             {{ $raffle->updated_at->format('d/m/Y') }}
@@ -28,12 +29,12 @@
                     </div>
 
                     @if($raffle->prizes->isEmpty())
-                        {{-- Badge para sorteos legacy (1 premio) --}}
-                        <span class="text-xs bg-gray-700 text-gray-400 px-2 py-1 rounded-full">
+                        <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded-full">
                             1 premio
                         </span>
                     @else
-                        <span class="text-xs bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 px-2 py-1 rounded-full">
+                        <span class="text-xs px-2 py-1 rounded-full font-bold"
+                              style="background: rgba(57,255,20,0.1); border:1px solid rgba(57,255,20,0.4); color:#39FF14;">
                             {{ $raffle->prizes->count() }} premios
                         </span>
                     @endif
@@ -42,11 +43,12 @@
                 <!-- PREMIOS MÚLTIPLES -->
                 @if($raffle->prizes->isNotEmpty())
 
-                    <div class="divide-y divide-gray-700">
+                    <div>
                         @foreach($raffle->prizes as $prize)
-                            <div class="flex justify-between items-center px-5 py-3">
+                            <div class="flex justify-between items-center px-5 py-3"
+                                 style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                                 <div>
-                                    <div class="text-sm font-bold text-yellow-300">
+                                    <div class="text-sm font-bold gold-text">
                                         {{ $prize->name }}
                                     </div>
                                     @if($prize->description)
@@ -56,7 +58,7 @@
                                     @endif
                                 </div>
                                 <div class="text-right">
-                                    <div class="text-green-400 font-black">
+                                    <div class="neon-text font-black">
                                         Nº {{ str_pad($prize->winner_number, 2, '0', STR_PAD_LEFT) }}
                                     </div>
                                     <div class="text-gray-300 text-xs">
@@ -73,10 +75,10 @@
                     <div class="flex justify-between items-center px-5 py-4">
                         <div class="text-gray-400 text-sm">Ganador único</div>
                         <div class="text-right">
-                            <div class="text-green-400 text-xl font-black">
+                            <div class="neon-text text-xl font-black">
                                 Nº {{ str_pad($raffle->winner_number, 2, '0', STR_PAD_LEFT) }}
                             </div>
-                            <div class="text-yellow-300 text-sm">
+                            <div class="gold-text text-sm">
                                 {{ $raffle->winner_name ?? 'Ganador' }}
                             </div>
                         </div>

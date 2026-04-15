@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $raffle->name)
+@section('title', $raffle->name . ' — Gana tu Celular Py')
 
 @section('content')
 
@@ -12,9 +12,7 @@
         : collect();
 @endphp
 
-{{-- ═══════════════════════════════════════════════════════
-     SORTEO FINALIZADO — PÁGINA DE GANADORES
-═══════════════════════════════════════════════════════ --}}
+{{-- SORTEO FINALIZADO — PÁGINA DE GANADORES --}}
 
 <canvas id="confetti-canvas"
         class="fixed inset-0 pointer-events-none z-50"
@@ -24,8 +22,8 @@
 
     {{-- HEADER FESTIVO --}}
     <div class="text-center py-6 px-4">
-        <div class="text-5xl mb-2">🏆</div>
-        <h1 class="text-2xl font-black text-yellow-400 leading-tight">
+        <div class="text-5xl mb-2">📱</div>
+        <h1 class="text-2xl font-black neon-text leading-tight">
             ¡Tenemos Ganadores!
         </h1>
         <p class="text-gray-300 text-sm mt-1">{{ $raffle->name }}</p>
@@ -36,7 +34,8 @@
 
     {{-- IMAGEN DEL SORTEO --}}
     @if($raffle->image)
-        <div class="mx-4 rounded-2xl overflow-hidden border border-yellow-500/30 mb-6">
+        <div class="mx-4 rounded-2xl overflow-hidden mb-6"
+             style="border: 1px solid rgba(57,255,20,0.3); box-shadow: 0 0 12px rgba(57,255,20,0.1);">
             <img src="{{ asset('storage/' . $raffle->image) }}"
                  class="w-full h-48 object-cover opacity-80"
                  alt="{{ $raffle->name }}">
@@ -59,11 +58,11 @@
                 @php
                     $position = $index + 1;
 
-                    $colors = match($position) {
-                        1 => ['ring' => 'ring-yellow-400', 'bg' => 'bg-yellow-400/10', 'num' => 'text-yellow-400', 'badge' => 'bg-yellow-400 text-black'],
-                        2 => ['ring' => 'ring-gray-400',   'bg' => 'bg-gray-400/10',   'num' => 'text-gray-300',   'badge' => 'bg-gray-400 text-black'],
-                        3 => ['ring' => 'ring-orange-400', 'bg' => 'bg-orange-400/10', 'num' => 'text-orange-400', 'badge' => 'bg-orange-500 text-white'],
-                        default => ['ring' => 'ring-blue-400', 'bg' => 'bg-blue-400/10', 'num' => 'text-blue-300', 'badge' => 'bg-blue-500 text-white'],
+                    $styles = match($position) {
+                        1 => ['ring' => '#FFD700', 'bg' => 'rgba(255,215,0,0.07)', 'num' => '#FFD700', 'badge_bg' => '#FFD700', 'badge_text' => '#000'],
+                        2 => ['ring' => '#aaa',    'bg' => 'rgba(170,170,170,0.07)', 'num' => '#ccc',   'badge_bg' => '#aaa',    'badge_text' => '#000'],
+                        3 => ['ring' => '#cd7f32', 'bg' => 'rgba(205,127,50,0.07)',  'num' => '#cd7f32','badge_bg' => '#cd7f32', 'badge_text' => '#fff'],
+                        default => ['ring' => '#39FF14', 'bg' => 'rgba(57,255,20,0.07)', 'num' => '#39FF14', 'badge_bg' => '#39FF14', 'badge_text' => '#000'],
                     };
 
                     $label = method_exists($prize, 'positionLabel')
@@ -71,10 +70,12 @@
                         : ($position . '° Premio');
                 @endphp
 
-                <div class="rounded-2xl ring-2 {{ $colors['ring'] }} {{ $colors['bg'] }} p-4">
+                <div class="rounded-2xl p-4"
+                     style="border: 2px solid {{ $styles['ring'] }}; background: {{ $styles['bg'] }}; box-shadow: 0 0 10px {{ $styles['ring'] }}33;">
 
                     <div class="flex items-center gap-2 mb-3 flex-wrap">
-                        <span class="text-xs font-bold px-2 py-1 rounded-full {{ $colors['badge'] }}">
+                        <span class="text-xs font-black px-2 py-1 rounded-full"
+                              style="background: {{ $styles['badge_bg'] }}; color: {{ $styles['badge_text'] }};">
                             {{ $label }}
                         </span>
 
@@ -98,7 +99,8 @@
 
                             <div class="text-right shrink-0">
                                 <p class="text-gray-500 text-xs">Número</p>
-                                <p class="font-black text-3xl {{ $colors['num'] }}">
+                                <p class="font-black text-3xl"
+                                   style="color: {{ $styles['num'] }}; text-shadow: 0 0 8px {{ $styles['num'] }};">
                                     {{ str_pad($prize->winner_number, 2, '0', STR_PAD_LEFT) }}
                                 </p>
                             </div>
@@ -118,9 +120,10 @@
         @elseif(!empty($raffle->winner_number))
 
             {{-- GANADOR LEGACY (1 solo premio) --}}
-            <div class="rounded-2xl ring-2 ring-yellow-400 bg-yellow-400/10 p-6 text-center">
+            <div class="rounded-2xl p-6 text-center neon-border neon-glow"
+                 style="background: rgba(57,255,20,0.07);">
                 <p class="text-xs text-gray-400 mb-1">Número Ganador</p>
-                <p class="text-7xl font-black text-yellow-400">
+                <p class="text-7xl font-black neon-text">
                     {{ str_pad($raffle->winner_number, 2, '0', STR_PAD_LEFT) }}
                 </p>
 
@@ -133,7 +136,7 @@
 
         @else
 
-            <div class="text-center text-gray-500 py-6 bg-[#141414] rounded-2xl border border-white/5">
+            <div class="text-center text-gray-500 py-6 rounded-2xl card-dark">
                 Resultados próximamente
             </div>
 
@@ -144,7 +147,7 @@
     {{-- VOLVER --}}
     <div class="px-4 mt-8">
         <a href="/"
-           class="block w-full text-center bg-[#141414] border border-yellow-500/30 text-yellow-400 py-3 rounded-xl font-semibold text-sm">
+           class="block w-full text-center py-3 rounded-xl font-semibold text-sm neon-text transition card-dark">
             ← Ver otros sorteos
         </a>
     </div>
@@ -168,7 +171,7 @@
     resize();
     window.addEventListener('resize', resize);
 
-    const COLORS = ['#facc15', '#f97316', '#22c55e', '#3b82f6', '#ec4899', '#a855f7'];
+    const COLORS = ['#39FF14', '#FFD700', '#ffffff', '#00ffff', '#39FF14', '#FFD700'];
 
     const pieces = Array.from({ length: 120 }, () => ({
         x: Math.random() * canvas.width,
@@ -227,22 +230,21 @@
 
 @else
 
-{{-- ═══════════════════════════════════════════════════════
-     SORTEO ACTIVO — DETALLE Y RESERVA
-═══════════════════════════════════════════════════════ --}}
+{{-- SORTEO ACTIVO — DETALLE Y RESERVA --}}
 
 <div class="pb-10">
 
     {{-- IMAGEN --}}
     @if($raffle->image)
-        <div class="rounded-b-2xl overflow-hidden -mx-4 -mt-4 mb-5">
+        <div class="rounded-b-2xl overflow-hidden -mx-4 -mt-4 mb-5"
+             style="border-bottom: 1px solid rgba(57,255,20,0.2);">
             <img src="{{ asset('storage/' . $raffle->image) }}"
                  class="w-full h-52 object-cover"
                  alt="{{ $raffle->name }}">
         </div>
     @else
-        <div class="h-36 flex items-center justify-center bg-[#111] rounded-2xl mb-5 text-4xl">
-            🎁
+        <div class="h-36 flex items-center justify-center rounded-2xl mb-5 text-4xl card-dark">
+            📱
         </div>
     @endif
 
@@ -250,33 +252,36 @@
     <div class="px-1">
 
         <div class="flex items-start justify-between gap-2 mb-1">
-            <h1 class="text-xl font-black text-yellow-300 leading-tight">
+            <h1 class="text-xl font-black gold-text leading-tight">
                 {{ $raffle->name }}
             </h1>
-            <span class="shrink-0 text-xs bg-yellow-400 text-black font-bold px-2 py-1 rounded-lg mt-0.5">
+            <span class="shrink-0 text-xs text-black font-black px-2 py-1 rounded-lg mt-0.5"
+                  style="background:#39FF14; box-shadow: 0 0 6px #39FF14;">
                 ACTIVO
             </span>
         </div>
 
-        <p class="text-yellow-200 font-semibold text-lg mb-4">
+        <p class="text-[#39FF14] font-semibold text-lg mb-4">
             💰 Gs. {{ number_format($raffle->price, 0, ',', '.') }} por número
         </p>
 
         {{-- ESTADÍSTICAS --}}
         <div class="grid grid-cols-3 gap-2 mb-5">
 
-            <div class="bg-[#141414] rounded-xl p-3 text-center border border-white/5">
+            <div class="rounded-xl p-3 text-center card-dark">
                 <p class="text-xl font-black text-white">{{ $total }}</p>
                 <p class="text-xs text-gray-500 mt-0.5">Total</p>
             </div>
 
-            <div class="bg-[#141414] rounded-xl p-3 text-center border border-green-500/20">
-                <p class="text-xl font-black text-green-400">{{ $free }}</p>
+            <div class="rounded-xl p-3 text-center"
+                 style="background: rgba(57,255,20,0.07); border:1px solid rgba(57,255,20,0.3);">
+                <p class="text-xl font-black neon-text">{{ $free }}</p>
                 <p class="text-xs text-gray-500 mt-0.5">Disponibles</p>
             </div>
 
-            <div class="bg-[#141414] rounded-xl p-3 text-center border border-yellow-500/20">
-                <p class="text-xl font-black text-yellow-400">{{ $sold + $reserved }}</p>
+            <div class="rounded-xl p-3 text-center"
+                 style="background: rgba(255,215,0,0.07); border:1px solid rgba(255,215,0,0.3);">
+                <p class="text-xl font-black gold-text">{{ $sold + $reserved }}</p>
                 <p class="text-xs text-gray-500 mt-0.5">Vendidos</p>
             </div>
 
@@ -286,17 +291,18 @@
         <div class="mb-6">
             <div class="flex justify-between text-xs text-gray-400 mb-1">
                 <span>Progreso de venta</span>
-                <span class="font-bold text-yellow-400">{{ $progress }}%</span>
+                <span class="font-black neon-text">{{ $progress }}%</span>
             </div>
-            <div class="w-full bg-gray-800 rounded-full h-3">
-                <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 h-3 rounded-full transition-all"
-                     style="width: {{ $progress }}%"></div>
+            <div class="w-full bg-black rounded-full h-3"
+                 style="border:1px solid rgba(57,255,20,0.2);">
+                <div class="h-3 rounded-full transition-all"
+                     style="width: {{ $progress }}%; background: linear-gradient(to right, #39FF14, #00cc0a); box-shadow: 0 0 8px #39FF14;"></div>
             </div>
         </div>
 
         {{-- FECHA --}}
         @if($raffle->draw_date)
-            <div class="bg-[#141414] border border-white/5 rounded-xl px-4 py-3 flex items-center gap-3 mb-6">
+            <div class="rounded-xl px-4 py-3 flex items-center gap-3 mb-6 card-dark">
                 <span class="text-2xl">📅</span>
                 <div>
                     <p class="text-xs text-gray-500">Fecha del sorteo</p>
@@ -309,7 +315,7 @@
 
         {{-- BOTÓN WHATSAPP --}}
         <button onclick="reservarWhatsApp()"
-                class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-black py-4 rounded-2xl text-base shadow-lg shadow-green-900/40 active:scale-95 transition duration-150 flex items-center justify-center gap-2">
+                class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-black py-4 rounded-2xl text-base shadow-lg active:scale-95 transition duration-150 flex items-center justify-center gap-2">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.99.573 3.842 1.562 5.404L2 22l4.734-1.54A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2zm.001 18a8 8 0 110-16 8 8 0 010 16z"/>

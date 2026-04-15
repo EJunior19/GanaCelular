@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $raffle->name)
+@section('title', $raffle->name . ' — Gana tu Celular Py')
 
 @section('content')
 
@@ -9,16 +9,17 @@
     <!-- IMAGEN -->
     <div class="mb-4">
         <img src="{{ asset('storage/' . $raffle->image) }}"
-             class="w-full h-56 object-cover rounded-2xl shadow-xl">
+             class="w-full h-56 object-cover rounded-2xl shadow-xl"
+             style="border: 1px solid rgba(57,255,20,0.3); box-shadow: 0 0 15px rgba(57,255,20,0.15);">
     </div>
 
     <!-- INFO -->
     <div class="text-center mb-5">
-        <h1 class="text-2xl font-bold text-yellow-400">
+        <h1 class="text-2xl font-black gold-text">
             {{ $raffle->name }}
         </h1>
 
-        <p class="text-yellow-300 text-xl font-semibold mt-1">
+        <p class="neon-text text-xl font-semibold mt-1">
             💰 Gs. {{ number_format($raffle->price, 0, ',', '.') }}
         </p>
     </div>
@@ -31,52 +32,50 @@
         $percent = $total > 0 ? (($sold + $reserved) / $total) * 100 : 0;
     @endphp
 
-    <!-- 🔥 METRICAS -->
+    <!-- METRICAS -->
     <div class="grid grid-cols-4 gap-2 mb-5">
 
-        <!-- TOTAL -->
-        <div class="bg-[#141414] p-3 rounded-2xl text-center border border-white/10 shadow">
-            <p class="text-lg font-bold text-white">{{ $total }}</p>
+        <div class="p-3 rounded-2xl text-center card-dark shadow">
+            <p class="text-lg font-black text-white">{{ $total }}</p>
             <p class="text-xs text-gray-400">Total</p>
         </div>
 
-        <!-- DISPONIBLES (DESTACADO) -->
         <div onclick="window.location.href='/sorteo/{{ $raffle->id }}/numeros'"
-             class="bg-green-500/10 p-3 rounded-2xl text-center border border-green-500/40 shadow cursor-pointer hover:scale-105 active:scale-95 transition">
-
-            <p class="text-lg font-bold text-green-400">{{ $free }}</p>
+             class="p-3 rounded-2xl text-center shadow cursor-pointer hover:scale-105 active:scale-95 transition"
+             style="background: rgba(57,255,20,0.07); border:1px solid rgba(57,255,20,0.3);">
+            <p class="text-lg font-black neon-text">{{ $free }}</p>
             <p class="text-xs text-gray-300">Disponibles</p>
         </div>
 
-        <!-- RESERVADOS -->
-        <div class="bg-yellow-400/10 p-3 rounded-2xl text-center border border-yellow-400/30 shadow">
-            <p class="text-lg font-bold text-yellow-400">{{ $reserved }}</p>
+        <div class="p-3 rounded-2xl text-center shadow"
+             style="background: rgba(255,215,0,0.07); border:1px solid rgba(255,215,0,0.3);">
+            <p class="text-lg font-black gold-text">{{ $reserved }}</p>
             <p class="text-xs text-gray-400">Reservados</p>
         </div>
 
-        <!-- VENDIDOS -->
-        <div class="bg-red-500/10 p-3 rounded-2xl text-center border border-red-500/30 shadow">
-            <p class="text-lg font-bold text-red-400">{{ $sold }}</p>
+        <div class="p-3 rounded-2xl text-center shadow"
+             style="background: rgba(239,68,68,0.07); border:1px solid rgba(239,68,68,0.25);">
+            <p class="text-lg font-black text-red-400">{{ $sold }}</p>
             <p class="text-xs text-gray-400">Vendidos</p>
         </div>
 
     </div>
 
-    <!-- 🔥 PROGRESO -->
-    <div class="bg-[#141414] p-4 rounded-2xl border border-white/10 shadow">
+    <!-- PROGRESO -->
+    <div class="p-4 rounded-2xl card-dark shadow">
 
         <div class="flex justify-between text-sm mb-2">
             <span class="text-gray-400">Progreso</span>
-            <span class="text-yellow-400 font-bold">{{ round($percent) }}%</span>
+            <span class="font-black neon-text">{{ round($percent) }}%</span>
         </div>
 
-        <div class="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
-            <div class="bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 h-3 rounded-full transition-all duration-500"
-                 style="width: {{ $percent }}%">
+        <div class="w-full bg-black rounded-full h-3 overflow-hidden"
+             style="border: 1px solid rgba(57,255,20,0.2);">
+            <div class="h-3 rounded-full transition-all duration-500"
+                 style="width: {{ $percent }}%; background: linear-gradient(to right, #39FF14, #00cc0a); box-shadow: 0 0 8px #39FF14;">
             </div>
         </div>
 
-        <!-- TEXTO EXTRA -->
         <p class="text-xs text-gray-500 mt-2 text-center">
             {{ $sold + $reserved }} de {{ $total }} ocupados
         </p>

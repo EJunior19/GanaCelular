@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $raffle->name . ' — Gana tu Celular Py')
+@section('title', $raffle->name . ' — Saltos Sorteios')
 
 @section('content')
 
@@ -24,11 +24,11 @@
     <div class="text-center py-6 px-4">
         <div class="text-5xl mb-2">📱</div>
         <h1 class="text-2xl font-black neon-text leading-tight">
-            ¡Tenemos Ganadores!
+            Temos Ganhadores!
         </h1>
         <p class="text-gray-300 text-sm mt-1">{{ $raffle->name }}</p>
         <p class="text-gray-500 text-xs mt-1">
-            Sorteado el {{ optional($raffle->updated_at)->format('d/m/Y') }}
+            Sorteado em {{ optional($raffle->updated_at)->format('d/m/Y') }}
         </p>
     </div>
 
@@ -49,7 +49,7 @@
 
             <div class="mb-2 text-center">
                 <p class="text-sm text-gray-400">
-                    Resultados del sorteo
+                    Resultados do sorteio
                 </p>
             </div>
 
@@ -67,7 +67,7 @@
 
                     $label = method_exists($prize, 'positionLabel')
                         ? $prize->positionLabel()
-                        : ($position . '° Premio');
+                        : ($position . '° Prêmio');
                 @endphp
 
                 <div class="rounded-2xl p-4"
@@ -80,7 +80,7 @@
                         </span>
 
                         <span class="text-white font-bold text-sm">
-                            {{ $prize->name ?: 'Premio ' . $position }}
+                            {{ $prize->name ?: 'Prêmio ' . $position }}
                         </span>
                     </div>
 
@@ -91,9 +91,9 @@
                     @if(method_exists($prize, 'hasWinner') ? $prize->hasWinner() : !empty($prize->winner_number))
                         <div class="flex justify-between items-end gap-3">
                             <div class="min-w-0">
-                                <p class="text-gray-500 text-xs">Ganador</p>
+                                <p class="text-gray-500 text-xs">Ganhador</p>
                                 <p class="text-white font-bold break-words">
-                                    {{ $prize->winner_name ?? 'Ganador confirmado' }}
+                                    {{ $prize->winner_name ?? 'Ganhador confirmado' }}
                                 </p>
                             </div>
 
@@ -108,7 +108,7 @@
                     @else
                         <div class="bg-black/20 rounded-xl px-3 py-2">
                             <p class="text-gray-500 text-xs italic">
-                                Ganador pendiente de asignación
+                                Ganhador pendente de confirmação
                             </p>
                         </div>
                     @endif
@@ -122,7 +122,7 @@
             {{-- GANADOR LEGACY (1 solo premio) --}}
             <div class="rounded-2xl p-6 text-center neon-border neon-glow"
                  style="background: rgba(57,255,20,0.07);">
-                <p class="text-xs text-gray-400 mb-1">Número Ganador</p>
+                <p class="text-xs text-gray-400 mb-1">Número Vencedor</p>
                 <p class="text-7xl font-black neon-text">
                     {{ str_pad($raffle->winner_number, 2, '0', STR_PAD_LEFT) }}
                 </p>
@@ -130,14 +130,14 @@
                 @if(!empty($raffle->winner_name))
                     <p class="text-white font-bold text-lg mt-2">{{ $raffle->winner_name }}</p>
                 @else
-                    <p class="text-gray-400 text-sm mt-2">Ganador confirmado</p>
+                    <p class="text-gray-400 text-sm mt-2">Ganhador confirmado</p>
                 @endif
             </div>
 
         @else
 
             <div class="text-center text-gray-500 py-6 rounded-2xl card-dark">
-                Resultados próximamente
+                Resultados em breve
             </div>
 
         @endif
@@ -148,7 +148,7 @@
     <div class="px-4 mt-8">
         <a href="/"
            class="block w-full text-center py-3 rounded-xl font-semibold text-sm neon-text transition card-dark">
-            ← Ver otros sorteos
+            ← Ver outros sorteios
         </a>
     </div>
 
@@ -257,7 +257,7 @@
             </h1>
             <span class="shrink-0 text-xs text-black font-black px-2 py-1 rounded-lg mt-0.5"
                   style="background:#39FF14; box-shadow: 0 0 6px #39FF14;">
-                ACTIVO
+                ATIVO
             </span>
         </div>
 
@@ -276,7 +276,7 @@
             <div class="rounded-xl p-3 text-center"
                  style="background: rgba(57,255,20,0.07); border:1px solid rgba(57,255,20,0.3);">
                 <p class="text-xl font-black neon-text">{{ $free }}</p>
-                <p class="text-xs text-gray-500 mt-0.5">Disponibles</p>
+                <p class="text-xs text-gray-500 mt-0.5">Disponíveis</p>
             </div>
 
             <div class="rounded-xl p-3 text-center"
@@ -290,7 +290,7 @@
         {{-- BARRA DE PROGRESO --}}
         <div class="mb-6">
             <div class="flex justify-between text-xs text-gray-400 mb-1">
-                <span>Progreso de venta</span>
+                <span>Progresso de vendas</span>
                 <span class="font-black neon-text">{{ $progress }}%</span>
             </div>
             <div class="w-full bg-black rounded-full h-3"
@@ -305,7 +305,7 @@
             <div class="rounded-xl px-4 py-3 flex items-center gap-3 mb-6 card-dark">
                 <span class="text-2xl">📅</span>
                 <div>
-                    <p class="text-xs text-gray-500">Fecha del sorteo</p>
+                    <p class="text-xs text-gray-500">Data do sorteio</p>
                     <p class="text-white font-semibold text-sm">
                         {{ \Carbon\Carbon::parse($raffle->draw_date)->format('d/m/Y') }}
                     </p>
@@ -320,13 +320,13 @@
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.99.573 3.842 1.562 5.404L2 22l4.734-1.54A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.522 2 11.999 2zm.001 18a8 8 0 110-16 8 8 0 010 16z"/>
             </svg>
-            Reservar por WhatsApp
+            Reservar pelo WhatsApp
         </button>
 
         {{-- VOLVER --}}
         <a href="/"
            class="block w-full text-center mt-3 text-gray-500 text-sm py-2">
-            ← Volver al inicio
+            ← Voltar ao início
         </a>
 
     </div>
@@ -338,8 +338,8 @@ function reservarWhatsApp() {
     const nombre = {!! json_encode($raffle->name) !!};
     const precio = {!! json_encode(number_format($raffle->price, 0, ',', '.')) !!};
 
-    const msg = "Hola! Quiero reservar un número para el sorteo *" + nombre +
-                "* (Gs. " + precio + " por número). ¿Cuáles están disponibles?";
+    const msg = "Olá! Quero reservar um número para o sorteio *" + nombre +
+                "* (Gs. " + precio + " por número). Quais estão disponíveis?";
 
     const url = "https://wa.me/595986770148?text=" + encodeURIComponent(msg);
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $raffle->name . ' — Gana tu Celular Py')
+@section('title', $raffle->name . ' — Saltos Sorteios')
 
 @section('content')
 
@@ -44,7 +44,7 @@
              class="p-3 rounded-2xl text-center shadow cursor-pointer hover:scale-105 active:scale-95 transition"
              style="background: rgba(57,255,20,0.07); border:1px solid rgba(57,255,20,0.3);">
             <p class="text-lg font-black neon-text">{{ $free }}</p>
-            <p class="text-xs text-gray-300">Disponibles</p>
+            <p class="text-xs text-gray-300">Disponíveis</p>
         </div>
 
         <div class="p-3 rounded-2xl text-center shadow"
@@ -65,7 +65,7 @@
     <div class="p-4 rounded-2xl card-dark shadow">
 
         <div class="flex justify-between text-sm mb-2">
-            <span class="text-gray-400">Progreso</span>
+            <span class="text-gray-400">Progresso</span>
             <span class="font-black neon-text">{{ round($percent) }}%</span>
         </div>
 

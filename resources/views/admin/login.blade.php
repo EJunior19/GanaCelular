@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login Admin — Gana tu Celular Py')
+@section('title', 'Login Admin — Saltos Sorteios')
 
 @section('content')
 
@@ -17,11 +17,11 @@
 
             <!-- TITULO -->
             <h1 class="text-2xl font-extrabold text-center mb-1 neon-text">
-                Panel Admin
+                Painel Admin
             </h1>
 
             <p class="text-center text-[#39FF14]/60 text-sm mb-5">
-                Gana tu Celular Py — Acceso seguro
+                Saltos Sorteios — Acesso seguro
             </p>
 
             <!-- ERROR -->
@@ -35,18 +35,18 @@
             <form method="POST" action="/admin/login" class="space-y-4">
                 @csrf
 
-                <input type="password" name="password" placeholder="🔒 Contraseña"
+                <input type="password" name="password" placeholder="🔒 Senha"
                     class="w-full p-4 rounded-xl text-white text-lg bg-black outline-none focus:ring-2 focus:ring-[#39FF14] transition"
                     style="border: 1px solid #39FF14; box-shadow: 0 0 6px rgba(57,255,20,0.2);">
 
                 <button class="w-full btn-neon py-4 text-lg rounded-xl font-black shadow-lg neon-glow">
-                    🚀 Ingresar
+                    🚀 Entrar
                 </button>
             </form>
 
             <!-- FOOTER -->
             <p class="text-center text-xs text-gray-500 mt-5">
-                Sistema seguro • Gana tu Celular Py
+                Sistema seguro • Saltos Sorteios
             </p>
 
         </div>

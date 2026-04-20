@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <!-- 📱 MOBILE -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Gana tu Celular Py')</title>
+    <title>@yield('title', 'Saltos Sorteios')</title>
 
     <!-- 🎨 ESTILO -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -77,11 +77,11 @@
              style="box-shadow: 0 2px 12px rgba(57,255,20,0.15);">
 
             <a href="/" class="text-lg font-black neon-text">
-                📱 GanaCelularPY
+                📱 Saltos Sorteios
             </a>
 
             <div class="flex gap-3 text-sm">
-                <a href="/" class="text-[#39FF14] hover:text-white transition font-semibold">Inicio</a>
+                <a href="/" class="text-[#39FF14] hover:text-white transition font-semibold">Início</a>
                 <a href="/admin" class="text-[#39FF14] hover:text-white transition font-semibold">Admin</a>
             </div>
 
@@ -97,7 +97,7 @@
     <!-- 📲 BOTÓN INSTALAR APP -->
     <button id="installBtn"
         class="fixed bottom-4 right-4 btn-neon px-4 py-3 rounded-full shadow-lg hidden hover:scale-105 transition z-50 neon-glow">
-        📲 Instalar
+        📲 Instalar App
     </button>
 
     <!-- ⚙️ SCRIPTS -->
@@ -107,7 +107,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(() => console.log('Service Worker registrado'))
-                .catch(err => console.log('SW error', err));
+                .catch(err => console.log('SW erro', err));
         }
 
         // 📲 INSTALAR APP

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Elegir números — Gana tu Celular Py')
+@section('title', 'Escolher números — Saltos Sorteios')
 
 @section('content')
 
@@ -11,7 +11,7 @@
 <div class="px-3 pb-6">
 
     <h2 class="neon-text text-lg font-black text-center mb-4">
-        🎯 Elegí tu número
+        🎯 Escolha seu número
     </h2>
 
     <!-- GRID -->
@@ -41,7 +41,7 @@
     <!-- LEYENDA -->
     <div class="flex gap-4 justify-center text-xs text-gray-400 mb-4">
         <span class="flex items-center gap-1">
-            <span class="w-3 h-3 rounded inline-block" style="background:#39FF14;"></span> Disponible
+            <span class="w-3 h-3 rounded inline-block" style="background:#39FF14;"></span> Disponível
         </span>
         <span class="flex items-center gap-1">
             <span class="w-3 h-3 rounded inline-block" style="background:#FFD700;"></span> Reservado
@@ -52,12 +52,12 @@
     </div>
 
     <!-- FORM -->
-    <input id="nombre" type="text" placeholder="Tu nombre"
+    <input id="nombre" type="text" placeholder="Seu nome"
         class="w-full p-3 rounded-xl bg-black text-white mb-3 outline-none focus:ring-2 focus:ring-[#39FF14] transition"
         style="border: 1px solid #39FF14; box-shadow: 0 0 6px rgba(57,255,20,0.15);">
 
     <div id="seleccionadosBox" class="neon-text text-sm text-center mb-3 font-semibold">
-        Ninguno seleccionado
+        Nenhum selecionado
     </div>
 
     <button type="button" onclick="reservarNumeros()"
@@ -88,7 +88,7 @@ function toggleNumber(num, status) {
 
     document.getElementById('seleccionadosBox').innerText =
         seleccionados.length
-            ? 'Seleccionados: ' + seleccionados.join(', ')
+            ? 'Selecionados: ' + seleccionados.join(', ')
             : 'Ninguno seleccionado';
 }
 
@@ -96,12 +96,12 @@ async function reservarNumeros() {
     const nombre = document.getElementById('nombre').value.trim();
 
     if (!nombre) {
-        alert('Completá tu nombre');
+        alert('Informe seu nome');
         return;
     }
 
     if (seleccionados.length === 0) {
-        alert('Seleccioná al menos un número');
+        alert('Selecione pelo menos um número');
         return;
     }
 
@@ -123,18 +123,18 @@ async function reservarNumeros() {
         const data = await res.json();
 
         if (!res.ok || data.error) {
-            alert(data.error || 'Error al reservar');
+            alert(data.error || 'Erro ao reservar');
             return;
         }
 
-        const msg = `Hola quiero reservar:%0A%0A📱 {{ $raffle->name }}%0A🔢 ${seleccionados.join(', ')}%0A👤 ${nombre}`;
+        const msg = `Olá, quero reservar:%0A%0A📱 {{ $raffle->name }}%0A🔢 ${seleccionados.join(', ')}%0A👤 ${nombre}`;
         window.open(`https://wa.me/595986770148?text=${msg}`, '_blank');
 
         window.location.reload();
 
     } catch (error) {
         console.error(error);
-        alert('Ocurrió un error al reservar');
+        alert('Ocorreu um erro ao reservar');
     }
 }
 </script>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sorteo en vivo — Gana tu Celular Py')
+@section('title', 'Sorteo en vivo — Saltos Sorteios')
 
 @section('content')
 @php
@@ -21,7 +21,7 @@
 
 <div class="max-w-6xl mx-auto px-4 py-8 text-center">
 
-    <h1 class="text-4xl font-extrabold neon-text mb-2">📱 SORTEO EN VIVO</h1>
+    <h1 class="text-4xl font-extrabold neon-text mb-2">📱 SORTEIO AO VIVO</h1>
     <p class="text-gray-400 text-sm mb-6">{{ $raffle->name }}</p>
 
     <audio id="spinSound" src="/sounds/spin.mp3"></audio>
@@ -96,7 +96,7 @@
          style="background: rgba(57,255,20,0.07);">
         <div class="text-4xl mb-3 animate-bounce">📱</div>
         <div id="winnerPrizeName" class="gold-text font-bold text-lg mb-1 hidden"></div>
-        <h2 class="text-3xl font-extrabold neon-text mb-2">GANADOR</h2>
+        <h2 class="text-3xl font-extrabold neon-text mb-2">GANHADOR</h2>
         <div class="text-5xl font-black text-white mb-3">
             Nº <span id="winnerNumber" class="neon-text"></span>
         </div>
@@ -108,7 +108,7 @@
     @if($isMultiPrize)
     <!-- RESUMEN FINAL -->
     <div id="finalSummary" class="hidden mt-8 max-w-2xl mx-auto space-y-3">
-        <h3 class="gold-text font-extrabold text-xl mb-4">🎉 Todos los premios sorteados</h3>
+        <h3 class="gold-text font-extrabold text-xl mb-4">🎉 Todos os prêmios sorteados</h3>
         <div id="finalPrizesList" class="space-y-2"></div>
     </div>
     @endif
@@ -116,7 +116,7 @@
     <!-- BOTÓN PRINCIPAL -->
     <button id="spinBtn"
         class="mt-8 btn-neon px-8 py-4 rounded-2xl font-extrabold text-lg shadow-lg transition transform hover:scale-105 neon-glow">
-        🎯 INICIAR SORTEO
+        🎯 INICIAR SORTEIO
     </button>
 
 </div>
@@ -402,14 +402,14 @@ async function runDraw() {
             body: body.toString(),
         });
     } catch(e) {
-        alert('No se pudo conectar con el servidor.');
+        alert('Não foi possível conectar com o servidor.');
         resetUI();
         return;
     }
 
     if (!response.ok) {
         const err = await response.json().catch(() => ({}));
-        alert(err.message ?? 'Ocurrió un error al elegir el ganador.');
+        alert(err.message ?? 'Ocorreu um erro ao escolher o ganhador.');
         resetUI();
         return;
     }
@@ -433,7 +433,7 @@ async function runDraw() {
         );
     }
     if (!target) {
-        alert('No se encontró la tarjeta ganadora.');
+        alert('Não foi encontrada a carta ganhadora.');
         resetUI();
         return;
     }
@@ -468,12 +468,12 @@ async function runDraw() {
             markPillDrawn(prizes[currentPrizeIdx].order);
 
             if (data.all_drawn) {
-                if (currentPrizeLabel) currentPrizeLabel.textContent = '🎉 ¡Sorteo completado!';
+                if (currentPrizeLabel) currentPrizeLabel.textContent = '🎉 Sorteio concluído!';
                 if (currentPrizeDesc)  currentPrizeDesc.textContent  = '';
 
                 showFinalSummary();
 
-                spinBtn.textContent = '⬅️ VOLVER AL PANEL';
+                spinBtn.textContent = '⬅️ VOLTAR AO PAINEL';
                 spinBtn.disabled    = false;
                 spinBtn.classList.remove('opacity-60','cursor-not-allowed');
                 spinBtn.onclick = () => { window.location.href = '/admin'; };
@@ -485,14 +485,14 @@ async function runDraw() {
                     updatePrizeHeader();
                 }
 
-                spinBtn.textContent = `▶️ SIGUIENTE PREMIO`;
+                spinBtn.textContent = `▶️ PRÓXIMO PRÊMIO`;
                 spinBtn.disabled    = false;
                 spinBtn.classList.remove('opacity-60','cursor-not-allowed');
                 spinBtn.onclick = () => startSequence();
             }
 
         } else {
-            spinBtn.textContent = '⬅️ VOLVER AL PANEL';
+            spinBtn.textContent = '⬅️ VOLTAR AO PAINEL';
             spinBtn.disabled    = false;
             spinBtn.classList.remove('opacity-60','cursor-not-allowed');
             spinBtn.onclick = () => { window.location.href = '/admin'; };
@@ -507,11 +507,11 @@ buildTrack();
 if (isMultiPrize) {
 
     if (currentPrizeIdx < 0) {
-        if (currentPrizeLabel) currentPrizeLabel.textContent = '🎉 ¡Sorteo completado!';
+        if (currentPrizeLabel) currentPrizeLabel.textContent = '🎉 Sorteio concluído!';
         if (currentPrizeDesc)  currentPrizeDesc.textContent  = '';
 
         showFinalSummary();
-        spinBtn.textContent = '⬅️ VOLVER AL PANEL';
+        spinBtn.textContent = '⬅️ VOLTAR AO PAINEL';
         spinBtn.onclick = () => { window.location.href = '/admin'; };
 
     } else {
@@ -538,7 +538,7 @@ if (isMultiPrize) {
             existing.classList.add('winner-card');
             showWinner(String(existingWinnerNumber).padStart(2, '0'), existing.dataset.name || 'Participante', null);
 
-            spinBtn.textContent = '⬅️ VOLVER AL PANEL';
+            spinBtn.textContent = '⬅️ VOLTAR AO PAINEL';
             spinBtn.onclick = () => { window.location.href = '/admin'; };
         }
     }

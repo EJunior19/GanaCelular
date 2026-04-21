@@ -43,7 +43,7 @@
         <h2 class="gold-text font-black text-lg">{{ $raffle->name }}</h2>
 
         <p class="text-[#39FF14] text-sm mt-1 font-semibold">
-            💰 Gs. {{ number_format($raffle->price, 0, ',', '.') }}
+            💰 R$ {{ number_format($raffle->price, 2, ',', '.') }}
         </p>
 
         @if($raffle->prizes->isNotEmpty())
@@ -425,7 +425,7 @@ Obrigado a todos que participaram! 🙏
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎫 *NÚMEROS DISPONÍVEIS:*
 ${numerosDisponiblesLista}
-💰 Gs. ${precioFormato} por número
+💰 R$ ${precioFormato} por número
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Reserva já o teu número!
 🍀 Não perca esta oportunidade!`;
@@ -436,7 +436,7 @@ ${numerosDisponiblesLista}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎫 *NÚMEROS DISPONÍVEIS:*
 ${numerosDisponiblesLista}
-💰 Gs. ${precioFormato} por número
+💰 R$ ${precioFormato} por número
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Ainda há tempo, mas pouco!
 🍀 Boa sorte!`;
@@ -447,7 +447,7 @@ ${numerosDisponiblesLista}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎫 *NÚMEROS DISPONÍVEIS:*
 ${numerosDisponiblesLista}
-💰 Gs. ${precioFormato} por número
+💰 R$ ${precioFormato} por número
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Reserva antes que se esgotem!
 🍀 Boa sorte!`;
@@ -458,7 +458,7 @@ ${numerosDisponiblesLista}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎫 *NÚMEROS DISPONÍVEIS:*
 ${numerosDisponiblesLista}
-💰 Gs. ${precioFormato} por número
+💰 R$ ${precioFormato} por número
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🍀 Escolhe o teu número favorito!`;
     }
@@ -471,7 +471,7 @@ ${numerosDisponiblesLista}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ${listaPremios}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-💰 *Preço:* Gs. ${precioFormato}
+💰 *Preço:* R$ ${precioFormato}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📊 *Estado:* ${porcentajeVendido}% vendido (${numerosAsignados}/${totalNumeros})
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -495,7 +495,7 @@ ${listaNumeros}
 🎟️ *${raffle_name}*
 
 ${listaPremios}
-💰 Apenas Gs. ${precioFormato} por número
+💰 Apenas R$ ${precioFormato} por número
 
 📲 *Como participar?*
 1️⃣ Escolhe o teu número favorito
@@ -511,7 +511,7 @@ ${listaPremios}
 🎰 *${raffle_name}*
 
 📊 ${porcentajeVendido}% vendido
-💰 Gs. ${precioFormato} por número
+💰 R$ ${precioFormato} por número
 🎁 Prêmios incríveis!
 🚀 Participa agora!
 
@@ -528,7 +528,7 @@ Compartilha com quem quiseres 📢`,
 Quem não reservar agora
 fica sem participar ❌
 
-💰 Gs. ${precioFormato}
+💰 R$ ${precioFormato}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👇 *RESERVA AGORA!* 👇`,
 

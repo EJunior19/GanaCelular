@@ -20,7 +20,7 @@
         </h1>
 
         <p class="neon-text text-xl font-semibold mt-1">
-            💰 Gs. {{ number_format($raffle->price, 0, ',', '.') }}
+            💰 R$ {{ number_format($raffle->price, 2, ',', '.') }}
         </p>
     </div>
 

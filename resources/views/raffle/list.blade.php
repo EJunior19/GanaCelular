@@ -72,7 +72,7 @@
                     </h2>
 
                     <p class="text-[#39FF14] font-semibold mt-1">
-                        💰 Gs. {{ number_format($r->price, 0, ',', '.') }}
+                        💰 R$ {{ number_format($r->price, 2, ',', '.') }}
                     </p>
 
                     <p class="text-sm text-gray-400">

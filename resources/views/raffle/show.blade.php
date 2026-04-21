@@ -262,7 +262,7 @@
         </div>
 
         <p class="text-[#39FF14] font-semibold text-lg mb-4">
-            💰 Gs. {{ number_format($raffle->price, 0, ',', '.') }} por número
+            💰 R$ {{ number_format($raffle->price, 2, ',', '.') }} por número
         </p>
 
         {{-- ESTADÍSTICAS --}}
@@ -336,10 +336,10 @@
 <script>
 function reservarWhatsApp() {
     const nombre = {!! json_encode($raffle->name) !!};
-    const precio = {!! json_encode(number_format($raffle->price, 0, ',', '.')) !!};
+    const precio = {!! json_encode(number_format($raffle->price, 2, ',', '.')) !!};
 
     const msg = "Olá! Quero reservar um número para o sorteio *" + nombre +
-                "* (Gs. " + precio + " por número). Quais estão disponíveis?";
+                "* (R$ " + precio + " por número). Quais estão disponíveis?";
 
     const url = "https://wa.me/595986770148?text=" + encodeURIComponent(msg);
 

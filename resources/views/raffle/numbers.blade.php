@@ -60,7 +60,7 @@
         Nenhum selecionado
     </div>
 
-    <button type="button" onclick="reservarNumeros()"
+    <button type="button" id="btn-reservar" onclick="reservarNumeros()"
         class="w-full btn-neon py-3 rounded-xl font-black neon-glow">
         Reservar
     </button>
@@ -89,11 +89,13 @@ function toggleNumber(num, status) {
     document.getElementById('seleccionadosBox').innerText =
         seleccionados.length
             ? 'Selecionados: ' + seleccionados.join(', ')
-            : 'Ninguno seleccionado';
+            : 'Nenhum selecionado';
 }
 
 async function reservarNumeros() {
     const nombre = document.getElementById('nombre').value.trim();
+    const btn = document.getElementById('btn-reservar');
+    const btnOriginal = btn.innerHTML;
 
     if (!nombre) {
         alert('Informe seu nome');
@@ -104,6 +106,11 @@ async function reservarNumeros() {
         alert('Selecione pelo menos um número');
         return;
     }
+
+    // Deshabilitar botón y mostrar loading
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Reservando...';
+    btn.style.opacity = '0.6';
 
     try {
         const res = await fetch('/reservar', {
@@ -124,17 +131,28 @@ async function reservarNumeros() {
 
         if (!res.ok || data.error) {
             alert(data.error || 'Erro ao reservar');
+            btn.disabled = false;
+            btn.innerHTML = btnOriginal;
+            btn.style.opacity = '1';
             return;
         }
 
-        const msg = `Olá, quero reservar:%0A%0A📱 {{ $raffle->name }}%0A🔢 ${seleccionados.join(', ')}%0A👤 ${nombre}`;
-        window.open(`https://wa.me/595986770148?text=${msg}`, '_blank');
+        // Mostrar éxito
+        btn.innerHTML = '✅ Reservado!';
+        btn.style.background = '#39FF14';
+        btn.style.color = '#000';
 
-        window.location.reload();
+        // Esperar un momento y recargar
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
 
     } catch (error) {
         console.error(error);
         alert('Ocorreu um erro ao reservar');
+        btn.disabled = false;
+        btn.innerHTML = btnOriginal;
+        btn.style.opacity = '1';
     }
 }
 </script>
